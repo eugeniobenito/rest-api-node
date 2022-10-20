@@ -6,10 +6,12 @@ const app = express();
 
 app.use(cors());
 
-dbConnectSqlite();
-
 const port = process.env.PORT || 3000;
+
+app.use("/api", require("./routes"));
 
 app.listen(port, () => {
     console.log(`Escuchando por el puerto ${port}`);
 });
+
+dbConnectSqlite();
