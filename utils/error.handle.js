@@ -1,5 +1,5 @@
-const handleHttp = (res, error) => {
-    res.status(500).send({ error });
+const handleHttp = (res, error, code = 500) => {
+    res.status(code).send({ error });
 }; 
 
 module.exports = {

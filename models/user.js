@@ -4,25 +4,32 @@ const { DataTypes } = require("sequelize");
 const User = sequelize.define(
     "users",
     {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
         },
         age: {
             type: DataTypes.NUMBER,
+            allowNull: false,
         },
-        email: {
+        category: {
             type: DataTypes.STRING,
         },
         password: {
             type: DataTypes.STRING,
-        },
-        role: {
-            type: DataTypes.ENUM(["user", "admin"]),
+            allowNull: false,
         }
-    },
-    {
-        timestamps: true,
     }
 );
 
