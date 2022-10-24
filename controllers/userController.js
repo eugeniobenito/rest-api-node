@@ -31,11 +31,11 @@ const createUser = async (req, res) => {
     }
 };
 
-// TODO
 const updateUser = async (req, res) => {
+    console.log("HOLAAAA");
     try {
-        const body = matchedData(req);
-        const user = await userService.updateUser(body);
+        console.log(`desde CONTROLLER ${req.params.id}`);
+        const user = await userService.updateUser(req);
         res.status(201).send({user});
     } catch (e) {
         handleHttp(res, `ERROR_UPDATE_USER ${e}`);

@@ -42,7 +42,19 @@
     return data;
  } 
 
- const updateUser = async () => {
+ const updateUser = async (req) => {
+   let final_user = {
+      "id": req.params.id,
+      "name": req.body.name,
+      "email": req.body.email,
+      "age": req.body.age,
+      "category": setCategory(req.body.age),
+      "password": await encrypt(req.body.password)
+  };
+
+  const updated_user = await userRepository.updateUser(final_user);
+
+  return updated_user;
 
  } 
 

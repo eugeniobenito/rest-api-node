@@ -17,7 +17,19 @@ const createUser = async (user) => {
 }
 
 const updateUser = async (user) => {
-    const updated_user = await user.save();
+    const updated_user = await User.update({
+        name: user.name,
+        email: user.email,
+        age: user.age,
+        category: user.category
+    }, 
+    {
+        where: {
+            id: user.id
+        }
+    });
+
+    return user;
 }
 
 const deleteUser = async (id) => {
