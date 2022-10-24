@@ -24,7 +24,7 @@ const sequelize = new Sequelize("api-adi", "user", "password",
 
 const dbConnectSqlite = async () => {
     try {
-        await sequelize.sync().then(
+        await sequelize.sync({ force: true }).then(
             () => console.log("TODO OK CON LA BASE DE DATOS"));
     } catch (e) {
         console.log('SQLITE Error de Conexión', e);

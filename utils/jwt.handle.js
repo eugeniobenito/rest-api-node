@@ -4,7 +4,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const tokenSign = (user) => {
     const token = jwt.encode(
         {
-            "id": user.id
+            "id": user.id,
         },
         JWT_SECRET,
     );
