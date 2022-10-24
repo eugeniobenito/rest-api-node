@@ -13,7 +13,6 @@ const getUsers = async (req, res) => {
 
 const getUser = async (req, res) => {
     try {
-        console.log(`desde CONTROLLER ${req.params.id}`);
         const user = await userService.getUser(req.params.id);
         res.send(user);
     } catch (e) {
@@ -32,10 +31,8 @@ const createUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-    console.log("HOLAAAA");
     try {
-        console.log(`desde CONTROLLER ${req.params.id}`);
-        const user = await userService.updateUser(req);
+        const user = await userService.updateUser();
         res.status(201).send({user});
     } catch (e) {
         handleHttp(res, `ERROR_UPDATE_USER ${e}`);

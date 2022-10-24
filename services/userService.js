@@ -9,9 +9,7 @@
 } 
 
  const getUser = async (user_email) => {
-    console.log(`desde SERVICE ${user_email}`);
     const user = await userRepository.getUser(user_email);
-    console.log(`desde SERVICE con USER ${user}`);    
     return user;
  }
 
@@ -36,8 +34,6 @@
       user: new_user,
       role: role.role
     }
-
-    console.log(data);
 
     return data;
  } 

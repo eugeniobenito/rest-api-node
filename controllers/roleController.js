@@ -12,7 +12,6 @@ const getRoles = async (req, res) => {
 
 const getUserRoles = async (req, res) => {
     try {
-        console.log(`desde CONTROLLER ${req.params.user_email}`);
         const user = await roleService.getUserRoles(req.params.user_email);
         res.send(user);
     } catch (e) {
@@ -22,7 +21,6 @@ const getUserRoles = async (req, res) => {
 
 const addRole = async (req, res) => {
     try {
-        console.log(`desde role CONTROLLER ${req.body.user_email}`);
         const user_role = await roleService.addRole(req.body);
         res.status(201).send({ user_role });
     } catch (e) {
