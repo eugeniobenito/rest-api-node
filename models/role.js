@@ -4,18 +4,23 @@ const { DataTypes } = require("sequelize");
 const Role = sequelize.define(
     "roles",
     {
-        user_email: {
-            type: DataTypes.STRING,
+        id: {
+            type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
         },
         role: {
             type: DataTypes.STRING,
-            primaryKey: true,
+        },
+        user_email: {
+            type: DataTypes.STRING,
         }
+
     },
     {
-        timestamps: false
+        timestamps: false,
     }
 );
+
 
 module.exports = Role;

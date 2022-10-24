@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const { authMiddleware } = require("../middlewares/session");
-const validator = require("../validators/users")
+const validator = require("../validators/users");
 
 router
     .get("/", authMiddleware, userController.getUsers)
