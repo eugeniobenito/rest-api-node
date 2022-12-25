@@ -1,0 +1,7 @@
+Adicionalmente se ha implementado la documentación del API usando la herramienta SWAGGER. Se puede acceder a dicho recurso:
+    - /api/doc
+
+También se ha incluido la persistencia de datos. Usando Sequelize como ORM y SQLITE como motor de base de datos. La base de datos se generará automáticamente
+al correr el servidor:
+    - npm run start
+Se generará el archivo 'dev.sqlite' que contiene la base de datos.
