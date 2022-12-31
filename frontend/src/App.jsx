@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Events } from "./components/Events";
 import { Greeting } from "./Greeting";
+import { Users } from "./components/Users";
+import { Box } from "@chakra-ui/react";
 
 const App = () => {
   //   const [errormessage, setErrorMessage] = useState("");
@@ -55,10 +57,13 @@ const App = () => {
     <>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Greeting />}></Route>
-          <Route path="/events" element={<Events />}></Route>
-        </Routes>
+        <Box p={4}>
+          <Routes>
+            <Route path="/" element={<Greeting />}></Route>
+            <Route path="/events" element={<Events />}></Route>
+            <Route path="/users" element={<Users />}></Route>
+          </Routes>
+        </Box>
       </BrowserRouter>
     </>
   );
