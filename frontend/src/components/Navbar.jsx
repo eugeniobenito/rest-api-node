@@ -76,14 +76,16 @@ export default function Navbar() {
             >
               {loggedIn
                 ? linkTuples.map(([name, slug]) => (
-                  <Button
-                    as={Link}
-                    to={slug} 
-                    fontSize={"sm"}
-                    colorScheme='blue' variant='ghost'
-                  > {name}
+                    <Button
+                      as={Link}
+                      to={slug}
+                      fontSize={"sm"}
+                      colorScheme="blue"
+                      variant="ghost"
+                    >
+                      {" "}
+                      {name}
                     </Button>
-                    
                   ))
                 : null}
             </HStack>
@@ -99,7 +101,7 @@ export default function Navbar() {
                 <>
                   <Button
                     as={Link}
-                    to="/users"
+                    to="/login"
                     fontSize={"sm"}
                     fontWeight={400}
                     variant={"link"}
@@ -125,44 +127,47 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
-                <Button onClick={toggleColorMode}>
+                  <Button onClick={toggleColorMode}>
                     {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
                   </Button>
-                <Menu>
-                  <MenuButton
-                    as={Button}
-                    rounded={"full"}
-                    variant={"link"}
-                    cursor={"pointer"}
-                    minW={0}
-                  >
-                    <Avatar
-                      size={"sm"}
-                      src={"https://avatars.dicebear.com/api/male/username.svg"}
-                    />
-                  </MenuButton>
-                  <MenuList alignItems={"center"}>
-                    <br />
-                    <Center>
+                  <Menu>
+                    <MenuButton
+                      as={Button}
+                      rounded={"full"}
+                      variant={"link"}
+                      cursor={"pointer"}
+                      minW={0}
+                    >
                       <Avatar
-                        size={"2xl"}
+                        size={"sm"}
                         src={
                           "https://avatars.dicebear.com/api/male/username.svg"
                         }
                       />
-                    </Center>
-                    <br />
-                    <Center>
-                      <p>Username</p>
-                    </Center>
-                    <br />
-                    <MenuDivider />
-                    <MenuItem>Your Servers</MenuItem>
-                    <MenuItem>Account Settings</MenuItem>
-                    <MenuItem>Logout</MenuItem>
-                  </MenuList>
-                </Menu>
-                </>)}
+                    </MenuButton>
+                    <MenuList alignItems={"center"}>
+                      <br />
+                      <Center>
+                        <Avatar
+                          size={"2xl"}
+                          src={
+                            "https://avatars.dicebear.com/api/male/username.svg"
+                          }
+                        />
+                      </Center>
+                      <br />
+                      <Center>
+                        <p>Username</p>
+                      </Center>
+                      <br />
+                      <MenuDivider />
+                      <MenuItem>Your Servers</MenuItem>
+                      <MenuItem>Account Settings</MenuItem>
+                      <MenuItem>Logout</MenuItem>
+                    </MenuList>
+                  </Menu>
+                </>
+              )}
             </Stack>
           </Flex>
         </Flex>

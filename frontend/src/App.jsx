@@ -62,6 +62,7 @@ const App = () => {
             <Route path="/" element={<Greeting />}></Route>
             <Route path="/events" element={<Events />}></Route>
             <Route path="/users" element={<Users />}></Route>
+            <Route path="/login" element={<LoginForm />}></Route>
           </Routes>
         </Box>
       </BrowserRouter>
