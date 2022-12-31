@@ -76,55 +76,58 @@ export default function Navbar() {
             >
               {loggedIn
                 ? linkTuples.map(([name, slug]) => (
-                    <Link
-                      key={slug}
-                      to={slug}
-                      style={{
-                        boxShadow: "none",
-                        ":hover": {
-                          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                        },
-                      }}
-                    >
-                      {name}
-                    </Link>
+                  <Button
+                    as={Link}
+                    to={slug} 
+                    fontSize={"sm"}
+                    colorScheme='blue' variant='ghost'
+                  > {name}
+                    </Button>
+                    
                   ))
                 : null}
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
-            {!loggedIn ? (
-              <Stack
-                flex={{ base: 1, md: 0 }}
-                justify={"flex-end"}
-                direction={"row"}
-                spacing={6}
-              >
-                <Button
-                  as={"a"}
-                  fontSize={"sm"}
-                  fontWeight={400}
-                  variant={"link"}
-                  href={"#"}
-                >
-                  Sign In
-                </Button>
-                <Button
-                  display={{ base: "none", md: "inline-flex" }}
-                  fontSize={"sm"}
-                  fontWeight={600}
-                  color={"white"}
-                  bg={"pink.400"}
-                  href={"#"}
-                  _hover={{
-                    bg: "pink.300",
-                  }}
-                >
-                  Sign Up
-                </Button>
+            <Stack
+              flex={{ base: 1, md: 0 }}
+              justify={"flex-end"}
+              direction={"row"}
+              spacing={6}
+            >
+              {!loggedIn ? (
+                <>
+                  <Button
+                    as={Link}
+                    to="/users"
+                    fontSize={"sm"}
+                    fontWeight={400}
+                    variant={"link"}
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    display={{ base: "none", md: "inline-flex" }}
+                    fontSize={"sm"}
+                    fontWeight={600}
+                    color={"white"}
+                    bg={"pink.400"}
+                    href={"#"}
+                    _hover={{
+                      bg: "pink.300",
+                    }}
+                  >
+                    Sign Up
+                  </Button>
+                  <Button onClick={toggleColorMode}>
+                    {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                  </Button>{" "}
+                </>
+              ) : (
+                <>
                 <Button onClick={toggleColorMode}>
-                  {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-                </Button>
+                    {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                  </Button>
                 <Menu>
                   <MenuButton
                     as={Button}
@@ -159,8 +162,8 @@ export default function Navbar() {
                     <MenuItem>Logout</MenuItem>
                   </MenuList>
                 </Menu>
-              </Stack>
-            ) : null}
+                </>)}
+            </Stack>
           </Flex>
         </Flex>
         {/* 

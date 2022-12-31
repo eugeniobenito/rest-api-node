@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
 
 export const UserContext = createContext({
-  loggedIn: false,
+  loggedIn: true,
 });
 
 export function UserProvider(props) {
