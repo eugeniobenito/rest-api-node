@@ -19,12 +19,13 @@ const host = process.env.SQLITE_HOST;
 const sequelize = new Sequelize("api-adi", "user", "password",
     {
         dialect: "sqlite",
-        host: "./dev.sqlite"
+        host: "./dev.sqlite",
+        logging: false,
     });
 
 const dbConnectSqlite = async () => {
     try {
-        await sequelize.sync({ force: true }).then(
+        await sequelize.sync({ force: false }).then(
             () => console.log("Successful Connection to DB"));
     } catch (e) {
         console.log('SQLITE Error de Conexión', e);
