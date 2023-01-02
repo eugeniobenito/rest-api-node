@@ -56,7 +56,7 @@ export const EventCard = (props) => {
             <CloseButton ml="90%" position="absolute" />
             <Image
               src={imageUrl}
-              alt="Green double couch with wooden legs"
+              alt="EL NOMBRE DE LA CIUDAD ES INCORRECTO"
               borderRadius="lg"
             />
           </Box>

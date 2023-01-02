@@ -151,7 +151,6 @@ const LoginForm = () => {
             <Stack spacing="6">
               <Stack spacing="5">
                 <FormControl>
-                  {/* <FormLabel htmlFor="email">Email</FormLabel> */}
                   <InputGroup>
                     <InputLeftElement pointerEvents="none" />
                     <Input

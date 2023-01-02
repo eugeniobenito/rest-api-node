@@ -15,6 +15,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { EventCard } from "./EventCard";
+import { NewEventForm } from "./NewEventForm";
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
@@ -35,6 +36,7 @@ export const Events = () => {
 
   return (
     <>
+    <NewEventForm />
       <Wrap>
         {events.map((event) => (
           <WrapItem key={event.id}>
