@@ -5,7 +5,8 @@ const { authMiddleware } = require("../middlewares/session");
 const validator = require("../validators/users");
 
 router
-    .get("/", authMiddleware, userController.getUsers)
+    // .get("/", authMiddleware, userController.getUsers)
+    .get("/", userController.getUsers)
     .get("/:id", validator.validatorGetUser, userController.getUser)
     .post("/", validator.validatorCreateUser, userController.createUser)
     .put("/:id", validator.validatorCreateUser,

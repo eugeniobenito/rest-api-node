@@ -7,14 +7,15 @@ const port = process.env.PORT || 3000;
 const swaggerUI = require("swagger-ui-express");
 const swaggerDefinitions = require("./docs/swagger");
 
+app.set('json spaces', 2)
 app.use(express.json());
+app.use(cors());
 
 app.use("/api", require("./routes"));
 app.use("/api/doc", swaggerUI.serve, swaggerUI.setup(swaggerDefinitions));
-app.use(cors());
 
 app.listen(port, () => {
-    console.log(`Escuchando por el puerto ${port}`);
+  console.log(`Escuchando por el puerto ${port}`);
 });
 
 dbConnectSqlite();

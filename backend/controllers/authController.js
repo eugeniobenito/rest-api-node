@@ -27,7 +27,7 @@ const loginController = async (req, res) => {
             user
         }
 
-        res.send({ data });
+        res.json(data);
 
     } catch (e) {
         handleHttp(res, `ERROR_LOGIN ${e}`);

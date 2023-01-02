@@ -1,34 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import LoginForm from "./components/LoginForm";
+import loginService from "./services/login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import { Events } from "./components/Events";
+import { Greeting } from "./Greeting";
+import { Users } from "./components/Users";
+import { Box } from "@chakra-ui/react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  //   const [errormessage, setErrorMessage] = useState("");
+  //   const [username, setUserName] = useState("");
+  //   const [password, setPassword] = useState("");
+  //   const [user, setUser] = useState(null);
 
+  //   const handleLogin = async (event) => {
+  //     event.preventDefault();
+
+  //     try {
+  //       const user = await loginService.login({
+  //         email: username,
+  //         password,
+  //       });
+
+  //       window.localStorage.setItem("loggedUser", JSON.stringify(user));
+
+  //       console.log(user);
+  //       setUser(user);
+  //       setUserName("");
+  //       setPassword("");
+  //     } catch (e) {
+  //       setErrorMessage("Credenciales inválidas");
+  //       setTimeout(() => {
+  //         setErrorMessage(null);
+  //       }, 5000);
+  //     }
+
+  //     console.log("Submit!!");
+  //   };
+
+  //   const handleLogout = () => {
+  //     setUser(null);
+  //     window.localStorage.removeItem("loggedUser");
+  //   };
+
+  //   return (
+  //     <LoginForm
+  //       username={username}
+  //       password={password}
+  //       handleUsernameChange={({ target }) => setUserName(target.value)}
+  //       handlePasswordChange={({ target }) => setPassword(target.value)}
+  //       handleSubmit={handleLogin}
+  //     />
+  //   );
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Box p={4}>
+          <Routes>
+            <Route path="/" element={<Greeting />}></Route>
+            <Route path="/events" element={<Events />}></Route>
+            <Route path="/users" element={<Users />}></Route>
+            <Route path="/login" element={<LoginForm />}></Route>
+          </Routes>
+        </Box>
+      </BrowserRouter>
+    </>
+  );
+};
 
-export default App
+export default App;
