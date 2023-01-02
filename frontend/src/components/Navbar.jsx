@@ -44,12 +44,12 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 
-const NavLink = ({ children }) => <Link to="/">{children}</Link>;
-
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const userName = user === null ? "null" : user.user.name;
 
   const linkTuples = [
     ["Home", "/"],
@@ -113,10 +113,10 @@ export default function Navbar() {
                     fontSize={"sm"}
                     fontWeight={600}
                     color={"white"}
-                    bg={"pink.400"}
+                    bg={"blue.400"}
                     href={"#"}
                     _hover={{
-                      bg: "pink.300",
+                      bg: "blue.300",
                     }}
                   >
                     Sign Up
@@ -157,7 +157,7 @@ export default function Navbar() {
                       </Center>
                       <br />
                       <Center>
-                        <p>Username</p>
+                        <p><strong>{userName}</strong></p>
                       </Center>
                       <br />
                       <MenuDivider />
