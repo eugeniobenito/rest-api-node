@@ -1,4 +1,20 @@
 import { useState, useEffect } from "react";
+import { Wrap, WrapItem, Center } from "@chakra-ui/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Stack,
+  Heading,
+  Text,
+  ButtonGroup,
+  Button,
+  Image,
+  Collapse,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { EventCard } from "./EventCard";
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
@@ -9,7 +25,7 @@ export const Events = () => {
       const data = await response.json();
       setEvents(data);
     } catch (e) {
-      setError(e);
+      console.log(e);
     }
   }
 
@@ -18,12 +34,21 @@ export const Events = () => {
   }, []);
 
   return (
-    <div>
-      <ul>
+    <>
+      <Wrap>
         {events.map((event) => (
-          <li key={event.id}>{event.name}</li>
+          <WrapItem key={event.id}>
+            <EventCard event={event} />
+          </WrapItem>
         ))}
-      </ul>
-    </div>
+      </Wrap>
+    </>
+    // <div>
+    //   <ul>
+    //     {events.map((event) => (
+    //       <li key={event.id}>{event.name}</li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
