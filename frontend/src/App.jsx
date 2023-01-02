@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import LoginForm from "./components/LoginForm";
 import loginService from "./services/login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { Events } from "./components/Events";
 import { Greeting } from "./Greeting";
 import { Users } from "./components/Users";
 import { Box } from "@chakra-ui/react";
+import { UserContext } from "./contexts/UserContext";
 
 const App = () => {
   const [errormessage, setErrorMessage] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   // const handleLogin = async (event) => {
   //   event.preventDefault();
@@ -58,10 +60,16 @@ const App = () => {
         <Navbar />
         <Box p={4}>
           <Routes>
-            <Route path="/" element={<Greeting />}></Route>
-            <Route path="/events" element={<Events />}></Route>
-            <Route path="/users" element={<Users />}></Route>
-            <Route path="/login" element={<LoginForm />}></Route>
+            <Route path="/" element={<Greeting />} />
+            <Route
+              path="/events"
+              element={user ? <Events /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/users"
+              element={user ? <Users /> : <Navigate to="/login" />}
+            />
+            <Route path="/login" element={<LoginForm />} />
           </Routes>
         </Box>
       </BrowserRouter>

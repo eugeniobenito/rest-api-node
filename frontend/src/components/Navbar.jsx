@@ -39,7 +39,7 @@ import {
   useColorMode,
   Stack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
@@ -50,6 +50,23 @@ export default function Navbar() {
   const { loggedIn, setLoggedIn } = useContext(UserContext);
   const { user, setUser } = useContext(UserContext);
   const userName = user === null ? "null" : user.user.name;
+
+  const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/");
+  };
+
+  const navigateLogin = () => {
+    console.log("navegando a login");
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setLoggedIn(false)
+    window.localStorage.removeItem("loggedUser");
+    navigateLogin();
+  };
 
   const linkTuples = [
     ["Home", "/"],
@@ -157,13 +174,13 @@ export default function Navbar() {
                       </Center>
                       <br />
                       <Center>
-                        <p><strong>{userName}</strong></p>
+                        <p>
+                          <strong>{userName}</strong>
+                        </p>
                       </Center>
                       <br />
                       <MenuDivider />
-                      <MenuItem>Your Servers</MenuItem>
-                      <MenuItem>Account Settings</MenuItem>
-                      <MenuItem>Logout</MenuItem>
+                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </MenuList>
                   </Menu>
                 </>
