@@ -57,7 +57,6 @@ export default function Navbar() {
   };
 
   const navigateLogin = () => {
-    console.log("navegando a login");
     navigate("/login");
   };
 

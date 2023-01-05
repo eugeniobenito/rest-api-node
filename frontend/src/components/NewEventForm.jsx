@@ -22,9 +22,14 @@ import {
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 
-export const NewEventForm = () => {
+export const NewEventForm = ({
+  events,
+  setEvents,
+  eventsAdded,
+  setEventsAdded,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = useRef();
+  // const firstField = useRef();
   const [name, seName] = useState("");
   const [location, setLocation] = useState("");
   const baseUrl = "http://localhost:3000/api/events";
@@ -52,7 +57,9 @@ export const NewEventForm = () => {
         }),
       });
 
-      return data.json();
+      setEvents([...events, data]);
+      setEventsAdded(eventsAdded + 1);
+      return event;
     } catch (error) {
       console.log("Aqui esta el errrrrooor");
       throw error;
@@ -69,7 +76,7 @@ export const NewEventForm = () => {
       <Drawer
         isOpen={isOpen}
         placement="right"
-        initialFocusRef={firstField}
+        // initialFocusRef={firstField}
         onClose={onClose}
       >
         <DrawerOverlay />
@@ -90,6 +97,7 @@ export const NewEventForm = () => {
                   <FormControl>
                     <FormLabel htmlFor="username">Nombre</FormLabel>
                     <Input
+                      // ref={firstField}
                       type="text"
                       placeholder="nombre"
                       onChange={handleNameChange}

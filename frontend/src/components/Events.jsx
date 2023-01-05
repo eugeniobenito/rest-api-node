@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Wrap, WrapItem, Center } from "@chakra-ui/react";
 import {
   Card,
@@ -19,24 +19,27 @@ import { NewEventForm } from "./NewEventForm";
 
 export const Events = () => {
   const [events, setEvents] = useState([]);
+  const [eventsAdded, setEventsAdded] = useState(0);
 
-  async function fetchEvents() {
+  const fetchEvents = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/events");
       const data = await response.json();
+      console.log("En events component esto es de typo " + typeof data[0]);
       setEvents(data);
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
+    console.log("Ejecuntando fech events");
     fetchEvents();
-  }, []);
+  }, [eventsAdded]);
 
   return (
     <>
-    <NewEventForm />
+      <NewEventForm events={events} setEvents={setEvents} eventsAdded={eventsAdded} setEventsAdded={setEventsAdded}/>
       <Wrap>
         {events.map((event) => (
           <WrapItem key={event.id}>

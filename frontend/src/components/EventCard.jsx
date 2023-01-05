@@ -18,20 +18,18 @@ import {
 } from "@chakra-ui/react";
 
 async function obtainPhoto(city) {
-    const city_url = city.toLowerCase().split(" ").join("-");
-    const url =
-      "https://api.teleport.org/api/urban_areas/slug:" + city_url + "/images/";
-    console.log(city_url);
+  const city_url = city.toLowerCase().split(" ").join("-");
+  const url =
+    "https://api.teleport.org/api/urban_areas/slug:" + city_url + "/images/";
 
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data.photos[0].image.mobile);
-      return data.photos[0].image.mobile;
-    } catch (e) {
-      console.log(e);
-    }
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.photos[0].image.mobile;
+  } catch (e) {
+    console.log(e);
   }
+}
 
 export const EventCard = (props) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -40,13 +38,11 @@ export const EventCard = (props) => {
   const getImageUrl = async () => {
     const imageUrl = await obtainPhoto(props.event.location);
     setImageUrl(imageUrl);
-  }
-  
-  useEffect(() => {
-    getImageUrl();
-}, []);
+  };
 
-  console.log(imageUrl)
+    useEffect(() => {
+      getImageUrl();
+  }, []);
 
   return (
     <>
