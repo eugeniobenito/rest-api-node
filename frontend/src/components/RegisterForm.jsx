@@ -1,31 +1,3 @@
-// export default function LoginForm(props) {
-//   return (
-//     <form onSubmit={props.handleLogin}>
-//       <div>
-//         <input
-//           type="text"
-//           value={props.username}
-//           name="Username"
-//           placeholder="Username"
-//           onChange={props.handleUsernameChange}
-//         />
-//       </div>
-//       <div>
-//         <input
-//           type="password"
-//           value={props.password}
-//           name="Password"
-//           placeholder="Password"
-//           onChange={props.handlePasswordChange}
-//         />
-//       </div>
-//       <div>
-//         <button>Login</button>
-//       </div>
-//     </form>
-//   );
-// }
-
 import {
   Box,
   Button,
@@ -47,21 +19,24 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import loginService from "../services/login";
+import signupService from "../services/signup";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [username, setUserName] = useState("");
+  const [name, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [age, setAge] = useState(null);
+
   const { isOpen, onToggle } = useDisclosure();
   const { loggedIn, setLoggedIn } = useContext(UserContext);
   const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const navigateHome = () => {
-    navigate("/");
+  const navigateSignup = () => {
+    navigate("/signup");
   };
 
   const navigateLogin = () => {
@@ -85,31 +60,32 @@ const LoginForm = () => {
     setPassword(target.value);
   };
 
-  const handleLogin = async (event) => {
+  const handleUserEmailChange = ({ target }) => {
+    setEmail(target.value);
+  };
+
+  const handleUseAgeChange = ({ target }) => {
+    setAge(target.value);
+  };
+
+  const handleSignup = async (event) => {
     event.preventDefault();
 
     try {
-      const user = await loginService.login({
-        email: username,
+      const user = await signupService.signup({
+        name,
+        email,
+        age,
         password,
       });
 
-      window.localStorage.setItem("loggedUser", JSON.stringify(user));
-
-      if (user.error !== undefined) {
-        navigateLogin();
-      } else {
-        setUser(user);
-        setLoggedIn(true);
-        setUserName("");
-        setPassword("");
-        navigateHome();
-      }
+      navigateLogin();
     } catch (error) {
       // setErrorMessage("Credenciales inválidas");
       // setTimeout(() => {
       //   setErrorMessage(null);
       // }, 5000);
+      navigateSignup();
       console.log(error);
     }
   };
@@ -123,7 +99,7 @@ const LoginForm = () => {
         <Stack spacing="6">
           <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
             <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-              Sign in to your account
+              Register
             </Heading>
           </Stack>
         </Stack>
@@ -136,15 +112,33 @@ const LoginForm = () => {
           rounded="md"
           borderRadius={{ base: "none", sm: "xl" }}
         >
-          <form onSubmit={handleLogin}>
+          <form onSubmit={handleSignup}>
             <Stack spacing="6">
               <Stack spacing="5">
                 <FormControl>
                   <InputGroup>
                     <Input
+                      type="text"
+                      placeholder="Name"
+                      onChange={handleUsernameChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormControl>
+                  <InputGroup>
+                    <Input
+                      type="number"
+                      placeholder="Age"
+                      onChange={handleUseAgeChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormControl>
+                  <InputGroup>
+                    <Input
                       type="email"
                       placeholder="Email"
-                      onChange={handleUsernameChange}
+                      onChange={handleUserEmailChange}
                     />
                   </InputGroup>
                 </FormControl>
@@ -182,7 +176,7 @@ const LoginForm = () => {
                     bg: "blue.300",
                   }}
                 >
-                  Sign In
+                  Sign Up
                 </Button>{" "}
                 <HStack></HStack>
               </Stack>

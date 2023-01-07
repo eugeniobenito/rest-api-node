@@ -43,7 +43,7 @@ export const Events = () => {
       <Wrap>
         {events.map((event) => (
           <WrapItem key={event.id}>
-            <EventCard event={event} />
+            <EventCard event={event} events={events} setEvents={setEvents}/>
           </WrapItem>
         ))}
       </Wrap>

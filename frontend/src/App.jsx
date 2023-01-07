@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import loginService from "./services/login";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -70,6 +71,8 @@ const App = () => {
               element={user ? <Users /> : <Navigate to="/login" />}
             />
             <Route path="/login" element={<LoginForm />} />
+            <Route path="/signup" element={<RegisterForm />} />
+
           </Routes>
         </Box>
       </BrowserRouter>

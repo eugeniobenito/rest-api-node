@@ -62,7 +62,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     setUser(null);
-    setLoggedIn(false)
+    setLoggedIn(false);
     window.localStorage.removeItem("loggedUser");
     navigateLogin();
   };
@@ -125,6 +125,8 @@ export default function Navbar() {
                     Sign In
                   </Button>
                   <Button
+                    as={Link}
+                    to="/signup"
                     display={{ base: "none", md: "inline-flex" }}
                     fontSize={"sm"}
                     fontWeight={600}
@@ -198,8 +200,6 @@ export default function Navbar() {
           </Box>
         ) : null} */}
       </Box>
-
-      {loggedIn ? <Box p={4}>Content</Box> : <Box p={4}>Main</Box>}
     </>
   );
 }

@@ -7,6 +7,6 @@ router
     .get("/", eventController.getEvents)
     .post("/", eventController.createEvent)
     .delete("/:id", eventController.deleteEvent)
-
+    .put("/:id", eventController.updateEvent)
 
 module.exports = router;
