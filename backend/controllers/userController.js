@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const user = await userService.updateUser();
+        const user = await userService.updateUser(req);
         res.status(201).send({user});
     } catch (e) {
         handleHttp(res, `ERROR_UPDATE_USER ${e}`);

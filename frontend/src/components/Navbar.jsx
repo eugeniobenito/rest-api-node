@@ -1,32 +1,9 @@
-// import { Link } from "react-router-dom";
-
-// const Navbar = () => {
-//     return (
-//         <nav>
-//           <ul>
-//             <li>
-//               <Link to="/">Home</Link>
-//             </li>
-//             <li>
-//               <Link to="/events">Eventos</Link>
-//             </li>
-//             <li>
-//               <Link to="/users">Usuarios</Link>
-//             </li>
-//           </ul>
-//         </nav>
-//       );
-// };
-
-// export default Navbar;
-
 import {
   Box,
   Center,
   Flex,
   Avatar,
   HStack,
-  // Link,
   IconButton,
   Button,
   Menu,
@@ -39,20 +16,34 @@ import {
   useColorMode,
   Stack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
-
-const NavLink = ({ children }) => <Link to="/">{children}</Link>;
+import { useContext, useState } from "react";
+import { getRandomString } from "../utils/randomAvatar";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const [avatar] = useState(getRandomString());
+  const { user, setUser } = useContext(UserContext);
+  const userName = user === null ? "null" : user.user.name;
+
+  const navigate = useNavigate();
+
+  const navigateLogin = () => {
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    setLoggedIn(false);
+    window.localStorage.removeItem("loggedUser");
+    navigateLogin();
+  };
 
   const linkTuples = [
-    ["Home", "/"],
     ["Eventos", "/events"],
     ["Usuarios", "/users"],
   ];
@@ -68,7 +59,6 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
             <HStack
               as={"nav"}
               spacing={4}
@@ -109,14 +99,16 @@ export default function Navbar() {
                     Sign In
                   </Button>
                   <Button
+                    as={Link}
+                    to="/signup"
                     display={{ base: "none", md: "inline-flex" }}
                     fontSize={"sm"}
                     fontWeight={600}
                     color={"white"}
-                    bg={"pink.400"}
+                    bg={"blue.400"}
                     href={"#"}
                     _hover={{
-                      bg: "pink.300",
+                      bg: "blue.300",
                     }}
                   >
                     Sign Up
@@ -138,32 +130,22 @@ export default function Navbar() {
                       cursor={"pointer"}
                       minW={0}
                     >
-                      <Avatar
-                        size={"sm"}
-                        src={
-                          "https://avatars.dicebear.com/api/male/username.svg"
-                        }
-                      />
+                      <Avatar size={"sm"} src={avatar} />
                     </MenuButton>
                     <MenuList alignItems={"center"}>
                       <br />
                       <Center>
-                        <Avatar
-                          size={"2xl"}
-                          src={
-                            "https://avatars.dicebear.com/api/male/username.svg"
-                          }
-                        />
+                        <Avatar size={"2xl"} src={avatar} />
                       </Center>
                       <br />
                       <Center>
-                        <p>Username</p>
+                        <p>
+                          <strong>{userName}</strong>
+                        </p>
                       </Center>
                       <br />
                       <MenuDivider />
-                      <MenuItem>Your Servers</MenuItem>
-                      <MenuItem>Account Settings</MenuItem>
-                      <MenuItem>Logout</MenuItem>
+                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </MenuList>
                   </Menu>
                 </>
@@ -171,133 +153,7 @@ export default function Navbar() {
             </Stack>
           </Flex>
         </Flex>
-        {/* 
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null} */}
       </Box>
-
-      {loggedIn ? <Box p={4}>Content</Box> : <Box p={4}>Main</Box>}
     </>
   );
 }
-
-// import {
-//   Box,
-//   Flex,
-//   Avatar,
-//   Link,
-//   Button,
-//   Menu,
-//   MenuButton,
-//   MenuList,
-//   MenuItem,
-//   MenuDivider,
-//   useDisclosure,
-//   useColorModeValue,
-//   Stack,
-//   useColorMode,
-//   HStack,
-//   Center,
-// } from "@chakra-ui/react";
-// import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-// // import { Link } from "react-router-dom";
-
-// const NavLink = ({ children }) => (
-//   <Link
-//     px={2}
-//     py={1}
-//     rounded={"md"}
-//     _hover={{
-//       textDecoration: "none",
-//       bg: useColorModeValue("gray.200", "gray.700"),
-//     }}
-//     href={"#"}
-//   >
-//     {children}
-//   </Link>
-// );
-
-// const Links = ["Dashboard", "Projects", "Team"];
-
-// export default function Navbar() {
-//   const { colorMode, toggleColorMode } = useColorMode();
-//   const { isOpen, onOpen, onClose } = useDisclosure();
-//   return (
-//     <>
-//       <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-//         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-//           <Box>Logo</Box>
-//           <Button
-//             as={"a"}
-//             fontSize={"sm"}
-//             fontWeight={400}
-//             variant={"link"}
-//             href={"#"}
-//           >
-//             Sign In
-//           </Button>
-//           <HStack spacing={8} alignItems={"center"}>
-//             <Box>Logo</Box>
-//             <HStack
-//               as={"nav"}
-//               spacing={4}
-//               display={{ base: "none", md: "flex" }}
-//             >
-//               {Links.map((link) => (
-//                 <NavLink key={link}>{link}</NavLink>
-//               ))}
-//             </HStack>
-//           </HStack>
-
-//           <Flex alignItems={"center"}>
-//             <Stack direction={"row"} spacing={7}>
-//               <Button onClick={toggleColorMode}>
-//                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-//               </Button>
-
-//               <Menu>
-//                 <MenuButton
-//                   as={Button}
-//                   rounded={"full"}
-//                   variant={"link"}
-//                   cursor={"pointer"}
-//                   minW={0}
-//                 >
-//                   <Avatar
-//                     size={"sm"}
-//                     src={"https://avatars.dicebear.com/api/male/username.svg"}
-//                   />
-//                 </MenuButton>
-//                 <MenuList alignItems={"center"}>
-//                   <br />
-//                   <Center>
-//                     <Avatar
-//                       size={"2xl"}
-//                       src={"https://avatars.dicebear.com/api/male/username.svg"}
-//                     />
-//                   </Center>
-//                   <br />
-//                   <Center>
-//                     <p>Username</p>
-//                   </Center>
-//                   <br />
-//                   <MenuDivider />
-//                   <MenuItem>Your Servers</MenuItem>
-//                   <MenuItem>Account Settings</MenuItem>
-//                   <MenuItem>Logout</MenuItem>
-//                 </MenuList>
-//               </Menu>
-//             </Stack>
-//           </Flex>
-//         </Flex>
-//       </Box>
-//     </>
-//   );
-// }

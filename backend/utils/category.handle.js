@@ -10,7 +10,7 @@ const setCategory = (age) => {
         category = "sub23";
     }
     else if (age>=24) {
-        category = "absoltuto";
+        category = "absoluto";
     }
 
     return category;

@@ -10,6 +10,20 @@ const createEvent = async (event) => {
     return data;
 }
 
+const updateEvent = async (event) => {
+    const updated_event = await Event.update({
+        name: event.name,
+        location: event.location,
+    }, 
+    {
+        where: {
+            id: event.id
+        }
+    });
+
+    return event;
+}
+
 const deleteEvent = async (id) => {
     await Event.destroy({
         where: {
@@ -21,5 +35,6 @@ const deleteEvent = async (id) => {
 module.exports = {
     getEvents, 
     createEvent,
-    deleteEvent
+    deleteEvent,
+    updateEvent
 }

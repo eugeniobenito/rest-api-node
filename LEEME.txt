@@ -1,0 +1,32 @@
+La aplicación está pensada para funcionar como un dashboard de los administradores del sistema, que tendrán poder para hacer un CRUD de eventos y consultar el resto de usuarios administradores.
+
+# Puesta en marcha de la aplicación 
+Una vez descomprimido el proyecto, accedemos en terminales distintas tanto al directorio "backend" como al directorio "frontend".
+En cada uno de ellos ejecutamos:
+    ~/backend$ npm run dev
+    ~/frontend$ npm run dev
+
+El proyecto incorpora una base de datos sqlite "dev.sqlite" en el directorio "backend" con algunos datos de ejemplo. Se puede acceder a la aplicación con el usuario pre creado "admin@admin.es" "admin" o bien crear un nuevo usuario.
+
+# Requisitos optativos implementados
+Además de los requisitos obligatorios de la práctica, se han implementado los siguientes requisitos optativos:
+    - Estructura de proyecto usada por la herramienta de construcción de proyectos Vite y Single File Components (consultar package.json)
+    - Implementación de listado de un recurso adicional (usuarios) junto a la funcionalidad de registro de usuario (creación del recurso)
+    - Utilización del framework de componentes visuales Chakra UI
+    - Router para gestionar la navegación de la aplicacion (react-router-dom)
+
+# Aspectos a resaltar
+    - Para dotar de más "atractivo" al listado de eventos, al momento de renderizarse un componente "EventCard" se hace una petición asíncrona HTTP a una API pública que nos entregará una imagen de la ciudad solicitada. Puedes observar algunos ejemplos con los datos de muestra introducidos en la base de datos.
+    
+    Así mismo, cuando se modifique la localización de un evento, se actualizará su estado y se volverá a renderizar el componente. Por lo que se mostrará una nueva imagen de la ciudad actualizada.
+
+    Cabe recalcar que el nombre de las ciudades deben ser escritas en inglés para que la entienda la API que estamos utilizando. Aquí puedes consultar el listado con todas las ciudades que puedes utilizar (no te preocupes de las minúsculas o mayúsculas, el texto es parseado para que funcione correctamente):
+    https://api.teleport.org/api/urban_areas/
+
+    - Para modificar tanto el nombre como la localización de un Evento, haz click sobre el texto y se abrirá un cuadro de texto editable para poder modificar el valor. Posteriormente haz click en el botón de 'check' para guardar el cambio.
+
+    - Pese a no haber utilizado una librería de estado centrado como podría serlo Redux en React, se han empleado React Context. Se trata de una característica de React que permite pasar datos a través del árbol de componentes sin tener que pasar explícitamente los props a cada nivel. De este modo, mantenemos el estado del usuario que está usando la aplicación de forma centralizada.
+
+    - Como aporte de valor, se ha añadido la posibilidad de cambiar entre modo claro y oscuro mediante un 'Toggle' en la barra de herramientas.
+
+    - El empleo de Chakra UI como librería de componentes visuales ha ralentizado el desarrollo ya que maneja un "lenguaje" interno para manipular las propiedades de cada componente. La decisión de usar esta librería ha sido por la estética de los componentes que ofrecía y por ofrecer una alternativa a frameworks más populares como Bootstrap o MaterialUI.

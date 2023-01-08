@@ -1,6 +1,6 @@
-const baseUrl = "http://localhost:3000/api/auth/login";
+const baseUrl = "http://localhost:3000/api/auth/register";
 
-const login = async (credentials) => {
+const signup = async (credentials) => {
   try {
     const data = await fetch(baseUrl, {
       method: "POST",
@@ -16,4 +16,4 @@ const login = async (credentials) => {
   }
 };
 
-export default { login };
+export default { signup };

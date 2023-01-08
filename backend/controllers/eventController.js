@@ -28,8 +28,18 @@ const deleteEvent = async (req, res) => {
     }
 }
 
+const updateEvent = async (req, res) => {
+    try {
+        const event = await eventService.updateEvent(req);
+        res.status(201).send({event});
+    } catch (e) {
+        handleHttp(res, `ERROR_UPDATE_USER ${e}`);
+    }
+};
+
 module.exports = { 
     getEvents, 
     createEvent,
-    deleteEvent
+    deleteEvent,
+    updateEvent
 };
