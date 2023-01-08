@@ -16,15 +16,4 @@ const login = async (credentials) => {
   }
 };
 
-// async function login(credentials) {
-//   return await fetch(baseUrl, {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify(credentials),
-//     status: 200,
-//   })
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// }
-
 export default { login };

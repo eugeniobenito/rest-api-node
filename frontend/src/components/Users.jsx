@@ -26,13 +26,6 @@ export const Users = () => {
   }, []);
 
   return (
-    // <div>
-    //   <ul>
-    //     {users.map((user) => (
-    //       <li key={user.id}>{user.name}</li>
-    //     ))}
-    //   </ul>
-    // </div>
     <Wrap>
       {users.map((user) => (
         <WrapItem key={user.id}>

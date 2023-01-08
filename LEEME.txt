@@ -27,4 +27,6 @@ Además de los requisitos obligatorios de la práctica, se han implementado los 
 
     - Pese a no haber utilizado una librería de estado centrado como podría serlo Redux en React, se han empleado React Context. Se trata de una característica de React que permite pasar datos a través del árbol de componentes sin tener que pasar explícitamente los props a cada nivel. De este modo, mantenemos el estado del usuario que está usando la aplicación de forma centralizada.
 
+    - Como aporte de valor, se ha añadido la posibilidad de cambiar entre modo claro y oscuro mediante un 'Toggle' en la barra de herramientas.
+
     - El empleo de Chakra UI como librería de componentes visuales ha ralentizado el desarrollo ya que maneja un "lenguaje" interno para manipular las propiedades de cada componente. La decisión de usar esta librería ha sido por la estética de los componentes que ofrecía y por ofrecer una alternativa a frameworks más populares como Bootstrap o MaterialUI.

@@ -1,19 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
-import { Wrap, WrapItem, Center } from "@chakra-ui/react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Heading,
-  Text,
-  ButtonGroup,
-  Button,
-  Image,
-  Collapse,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { Wrap, WrapItem } from "@chakra-ui/react";
+
 import { EventCard } from "./EventCard";
 import { NewEventForm } from "./NewEventForm";
 
@@ -22,8 +9,6 @@ export const Events = () => {
   const [eventsAdded, setEventsAdded] = useState(0);
 
   const fetchEvents = async () => {
-    console.log("Este es el tokennn");
-    console.log(JSON.parse(window.localStorage.getItem("loggedUser"))["token"]);
     try {
       const response = await fetch("http://localhost:3000/api/events", {
         method: "GET",
@@ -34,7 +19,6 @@ export const Events = () => {
         },
       });
       const data = await response.json();
-      console.log("En events component esto es de typo " + typeof data[0]);
       setEvents(data);
     } catch (e) {
       console.log(e);
@@ -42,7 +26,6 @@ export const Events = () => {
   };
 
   useEffect(() => {
-    console.log("Ejecuntando fech events");
     fetchEvents();
   }, [eventsAdded]);
 
@@ -62,12 +45,5 @@ export const Events = () => {
         ))}
       </Wrap>
     </>
-    // <div>
-    //   <ul>
-    //     {events.map((event) => (
-    //       <li key={event.id}>{event.name}</li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 };

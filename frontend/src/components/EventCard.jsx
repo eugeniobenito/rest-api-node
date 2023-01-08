@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
-import { Wrap, WrapItem, Center } from "@chakra-ui/react";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Stack,
   Heading,
-  Text,
   ButtonGroup,
   Button,
   Image,
@@ -18,16 +15,13 @@ import {
   CloseButton,
   Editable,
   EditableInput,
-  EditableTextarea,
   EditablePreview,
   useEditableControls,
-  Flex,
   IconButton,
   useColorModeValue,
-  SlideFade,
   Tooltip,
 } from "@chakra-ui/react";
-import { CheckIcon, CloseIcon, EditIcon } from "@chakra-ui/icons";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 
 async function obtainPhoto(city) {
   const city_url = city.toLowerCase().split(" ").join("-");
@@ -56,8 +50,6 @@ async function deleteEvent(event_id) {
         "Content-Type": "application/json",
       },
     });
-    // const data = await response.json();
-    // return data.photos[0].image.mobile;
   } catch (e) {
     console.log(e);
   }
@@ -65,7 +57,7 @@ async function deleteEvent(event_id) {
 
 async function updateEvent(id, data) {
   const url = "http://localhost:3000/api/events/" + id;
-    console.log(JSON.parse(window.localStorage.getItem("loggedUser"))["token"]);
+  console.log(JSON.parse(window.localStorage.getItem("loggedUser"))["token"]);
   try {
     await fetch(url, {
       method: "PUT",
@@ -77,8 +69,6 @@ async function updateEvent(id, data) {
       },
       body: JSON.stringify(data),
     });
-    // const data = await response.json();
-    // return data.photos[0].image.mobile;
   } catch (e) {
     console.log(e);
   }
@@ -93,10 +83,6 @@ function EditableControls({ id, name, location, setImageUrl }) {
     updateEvent(id, { name, location });
     const imageUrl = await obtainPhoto(location);
     setImageUrl(imageUrl);
-    console.log(id + name + location);
-
-    // deleteEvent(event.id);
-    // setEvents((prev) => prev.filter((e) => e !== event));
   };
 
   return isEditing ? (
@@ -160,7 +146,6 @@ export const EventCard = ({ event, events, setEvents }) => {
             />
           </Box>
           <Stack mt="6" mb="-8" spacing="3">
-            {/* <Heading size="md">{name}</Heading> */}
             <Heading size="md">
               <Editable
                 defaultValue={name}
@@ -191,7 +176,6 @@ export const EventCard = ({ event, events, setEvents }) => {
               </Editable>
             </Heading>
             <Collapse in={isOpen} animateOpacity>
-              {/* <Text>{event.location}</Text> */}
               <Editable
                 defaultValue={location}
                 isPreviewFocusable={true}

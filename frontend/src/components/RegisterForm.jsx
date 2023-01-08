@@ -3,16 +3,12 @@ import {
   Button,
   Container,
   FormControl,
-  FormLabel,
   Heading,
   HStack,
   Input,
   Stack,
-  Link,
-  Text,
   useBreakpointValue,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
   IconButton,
   useDisclosure,
@@ -20,8 +16,6 @@ import {
 import { useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import signupService from "../services/signup";
-import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -29,10 +23,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState(null);
-
   const { isOpen, onToggle } = useDisclosure();
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
-  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   const navigateSignup = () => {
@@ -81,10 +72,6 @@ const LoginForm = () => {
 
       navigateLogin();
     } catch (error) {
-      // setErrorMessage("Credenciales inválidas");
-      // setTimeout(() => {
-      //   setErrorMessage(null);
-      // }, 5000);
       navigateSignup();
       console.log(error);
     }
@@ -161,7 +148,6 @@ const LoginForm = () => {
                     </InputRightElement>
                   </InputGroup>
                 </FormControl>
-                {/* <PasswordField /> */}
               </Stack>
               <HStack justify="space-between"></HStack>
               <Stack spacing="6">

@@ -1,46 +1,14 @@
-// export default function LoginForm(props) {
-//   return (
-//     <form onSubmit={props.handleLogin}>
-//       <div>
-//         <input
-//           type="text"
-//           value={props.username}
-//           name="Username"
-//           placeholder="Username"
-//           onChange={props.handleUsernameChange}
-//         />
-//       </div>
-//       <div>
-//         <input
-//           type="password"
-//           value={props.password}
-//           name="Password"
-//           placeholder="Password"
-//           onChange={props.handlePasswordChange}
-//         />
-//       </div>
-//       <div>
-//         <button>Login</button>
-//       </div>
-//     </form>
-//   );
-// }
-
 import {
   Box,
   Button,
   Container,
   FormControl,
-  FormLabel,
   Heading,
   HStack,
   Input,
   Stack,
-  Link,
-  Text,
   useBreakpointValue,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
   IconButton,
   useDisclosure,
@@ -56,8 +24,8 @@ const LoginForm = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { isOpen, onToggle } = useDisclosure();
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
-  const { user, setUser } = useContext(UserContext);
+  const { setLoggedIn } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   const navigateEvents = () => {
@@ -99,17 +67,14 @@ const LoginForm = () => {
       if (user.error !== undefined) {
         navigateLogin();
       } else {
-        console.log(user)
+        console.log(user);
         setUser(user);
         setLoggedIn(true);
         setUserName("");
         setPassword("");
-        navigateEvents()      }
+        navigateEvents();
+      }
     } catch (error) {
-      // setErrorMessage("Credenciales inválidas");
-      // setTimeout(() => {
-      //   setErrorMessage(null);
-      // }, 5000);
       console.log(error);
     }
   };
@@ -167,7 +132,6 @@ const LoginForm = () => {
                     </InputRightElement>
                   </InputGroup>
                 </FormControl>
-                {/* <PasswordField /> */}
               </Stack>
               <HStack justify="space-between"></HStack>
               <Stack spacing="6">

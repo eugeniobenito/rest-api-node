@@ -12,15 +12,9 @@ import {
   Box,
   FormLabel,
   Input,
-  InputRightAddon,
-  InputGroup,
-  Select,
-  Textarea,
-  InputLeftAddon,
   FormControl,
-  InputLeftElement,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export const NewEventForm = ({
   events,
@@ -29,7 +23,6 @@ export const NewEventForm = ({
   setEventsAdded,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const firstField = useRef();
   const [name, seName] = useState("");
   const [location, setLocation] = useState("");
   const baseUrl = "http://localhost:3000/api/events";
@@ -51,8 +44,8 @@ export const NewEventForm = ({
         headers: {
           "Content-Type": "application/json",
           Authorization:
-          "Bearer " +
-          JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
+            "Bearer " +
+            JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
         },
         body: JSON.stringify({
           name,
@@ -64,7 +57,7 @@ export const NewEventForm = ({
       setEventsAdded(eventsAdded + 1);
       return event;
     } catch (error) {
-      console.log("Aqui esta el errrrrooor");
+      console.log(error);
       throw error;
     }
   };
@@ -76,12 +69,7 @@ export const NewEventForm = ({
           Crear un evento
         </Button>
       </Box>
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        // initialFocusRef={firstField}
-        onClose={onClose}
-      >
+      <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <form onSubmit={handleCreateEvent}>
           <DrawerContent>
@@ -91,16 +79,9 @@ export const NewEventForm = ({
             <DrawerBody>
               <Stack spacing="24px">
                 <Box>
-                  {/* <FormLabel htmlFor="username">Nombre</FormLabel>
-                <Input
-                  ref={firstField}
-                  id="username"
-                  placeholder="Please enter user name"
-                /> */}
                   <FormControl>
                     <FormLabel htmlFor="username">Nombre</FormLabel>
                     <Input
-                      // ref={firstField}
                       type="text"
                       placeholder="nombre"
                       onChange={handleNameChange}
