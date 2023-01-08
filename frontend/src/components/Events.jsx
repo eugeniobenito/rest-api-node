@@ -22,8 +22,17 @@ export const Events = () => {
   const [eventsAdded, setEventsAdded] = useState(0);
 
   const fetchEvents = async () => {
+    console.log("Este es el tokennn");
+    console.log(JSON.parse(window.localStorage.getItem("loggedUser"))["token"]);
     try {
-      const response = await fetch("http://localhost:3000/api/events");
+      const response = await fetch("http://localhost:3000/api/events", {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bearer " +
+            JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
+        },
+      });
       const data = await response.json();
       console.log("En events component esto es de typo " + typeof data[0]);
       setEvents(data);
@@ -39,11 +48,16 @@ export const Events = () => {
 
   return (
     <>
-      <NewEventForm events={events} setEvents={setEvents} eventsAdded={eventsAdded} setEventsAdded={setEventsAdded}/>
+      <NewEventForm
+        events={events}
+        setEvents={setEvents}
+        eventsAdded={eventsAdded}
+        setEventsAdded={setEventsAdded}
+      />
       <Wrap>
         {events.map((event) => (
           <WrapItem key={event.id}>
-            <EventCard event={event} events={events} setEvents={setEvents}/>
+            <EventCard event={event} events={events} setEvents={setEvents} />
           </WrapItem>
         ))}
       </Wrap>

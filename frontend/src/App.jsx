@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import loginService from "./services/login";
@@ -9,6 +9,7 @@ import { Greeting } from "./Greeting";
 import { Users } from "./components/Users";
 import { Box } from "@chakra-ui/react";
 import { UserContext } from "./contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const [errormessage, setErrorMessage] = useState("");
@@ -16,45 +17,6 @@ const App = () => {
   const [password, setPassword] = useState("");
   const { user, setUser } = useContext(UserContext);
 
-  // const handleLogin = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     const user = await loginService.login({
-  //       email: username,
-  //       password,
-  //     });
-
-  //     window.localStorage.setItem("loggedUser", JSON.stringify(user));
-
-  //     console.log(user);
-  //     setUser(user);
-  //     setUserName("");
-  //     setPassword("");
-  //   } catch (e) {
-  //     setErrorMessage("Credenciales inválidas");
-  //     setTimeout(() => {
-  //       setErrorMessage(null);
-  //     }, 5000);
-  //   }
-
-  //   console.log("Submit!!");
-  // };
-
-  // const handleLogout = () => {
-  //   setUser(null);
-  //   window.localStorage.removeItem("loggedUser");
-  // };
-
-  //   return (
-  //     <LoginForm
-  // username={username}
-  // password={password}
-  // handleUsernameChange={({ target }) => setUserName(target.value)}
-  // handlePasswordChange={({ target }) => setPassword(target.value)}
-  // handleSubmit={handleLogin}
-  //     />
-  //   );
   return (
     <>
       <BrowserRouter>
@@ -70,9 +32,11 @@ const App = () => {
               path="/users"
               element={user ? <Users /> : <Navigate to="/login" />}
             />
-            <Route path="/login" element={<LoginForm />} />
+            <Route
+              path="/login"
+              element={user ? <Navigate to="/events" /> : <LoginForm />}
+            />
             <Route path="/signup" element={<RegisterForm />} />
-
           </Routes>
         </Box>
       </BrowserRouter>

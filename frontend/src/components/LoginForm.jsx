@@ -99,6 +99,7 @@ const LoginForm = () => {
       if (user.error !== undefined) {
         navigateLogin();
       } else {
+        console.log(user)
         setUser(user);
         setLoggedIn(true);
         setUserName("");

@@ -50,6 +50,9 @@ export const NewEventForm = ({
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization:
+          "Bearer " +
+          JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
         },
         body: JSON.stringify({
           name,

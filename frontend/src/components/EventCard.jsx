@@ -50,6 +50,9 @@ async function deleteEvent(event_id) {
     await fetch(url, {
       method: "DELETE",
       headers: {
+        Authorization:
+          "Bearer " +
+          JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
         "Content-Type": "application/json",
       },
     });
@@ -62,11 +65,14 @@ async function deleteEvent(event_id) {
 
 async function updateEvent(id, data) {
   const url = "http://localhost:3000/api/events/" + id;
-  console.log(url);
+    console.log(JSON.parse(window.localStorage.getItem("loggedUser"))["token"]);
   try {
     await fetch(url, {
       method: "PUT",
       headers: {
+        Authorization:
+          "Bearer " +
+          JSON.parse(window.localStorage.getItem("loggedUser"))["token"],
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
@@ -79,11 +85,8 @@ async function updateEvent(id, data) {
 }
 
 function EditableControls({ id, name, location, setImageUrl }) {
-  const {
-    isEditing,
-    getSubmitButtonProps,
-    getCancelButtonProps,
-  } = useEditableControls();
+  const { isEditing, getSubmitButtonProps, getCancelButtonProps } =
+    useEditableControls();
 
   const handleModifyEvent = async (e) => {
     e.preventDefault();
