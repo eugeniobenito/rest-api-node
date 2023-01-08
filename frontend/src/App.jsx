@@ -23,7 +23,6 @@ const App = () => {
         <Navbar />
         <Box p={4}>
           <Routes>
-            <Route path="/" element={<Greeting />} />
             <Route
               path="/events"
               element={user ? <Events /> : <Navigate to="/login" />}
@@ -36,7 +35,7 @@ const App = () => {
               path="/login"
               element={user ? <Navigate to="/events" /> : <LoginForm />}
             />
-            <Route path="/signup" element={<RegisterForm />} />
+            <Route path="/signup" element={user ? <Navigate to="/events" /> : <RegisterForm />} />
           </Routes>
         </Box>
       </BrowserRouter>

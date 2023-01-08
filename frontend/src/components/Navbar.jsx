@@ -1,25 +1,3 @@
-// import { Link } from "react-router-dom";
-
-// const Navbar = () => {
-//     return (
-//         <nav>
-//           <ul>
-//             <li>
-//               <Link to="/">Home</Link>
-//             </li>
-//             <li>
-//               <Link to="/events">Eventos</Link>
-//             </li>
-//             <li>
-//               <Link to="/users">Usuarios</Link>
-//             </li>
-//           </ul>
-//         </nav>
-//       );
-// };
-
-// export default Navbar;
-
 import {
   Box,
   Center,
@@ -42,12 +20,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserContext } from "../contexts/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { getRandomString } from "../utils/randomAvatar";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const { loggedIn, setLoggedIn } = useContext(UserContext);
+  const [avatar, setAvatar] = useState(getRandomString());
   const { user, setUser } = useContext(UserContext);
   const userName = user === null ? "null" : user.user.name;
 
@@ -68,7 +48,6 @@ export default function Navbar() {
   };
 
   const linkTuples = [
-    ["Home", "/"],
     ["Eventos", "/events"],
     ["Usuarios", "/users"],
   ];
@@ -84,7 +63,6 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={"center"}>
-            <Box>Logo</Box>
             <HStack
               as={"nav"}
               spacing={4}
@@ -156,22 +134,12 @@ export default function Navbar() {
                       cursor={"pointer"}
                       minW={0}
                     >
-                      <Avatar
-                        size={"sm"}
-                        src={
-                          "https://avatars.dicebear.com/api/male/username.svg"
-                        }
-                      />
+                      <Avatar size={"sm"} src={avatar} />
                     </MenuButton>
                     <MenuList alignItems={"center"}>
                       <br />
                       <Center>
-                        <Avatar
-                          size={"2xl"}
-                          src={
-                            "https://avatars.dicebear.com/api/male/username.svg"
-                          }
-                        />
+                        <Avatar size={"2xl"} src={avatar} />
                       </Center>
                       <br />
                       <Center>

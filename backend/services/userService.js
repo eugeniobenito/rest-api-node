@@ -26,7 +26,7 @@
     const role = await roleService.addRole(
       {
          "user_email": user.email,
-         "role": "user"
+         "role": "admin"
       }
     );
 

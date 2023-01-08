@@ -60,8 +60,8 @@ const LoginForm = () => {
   const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
-  const navigateHome = () => {
-    navigate("/");
+  const navigateEvents = () => {
+    navigate("/events");
   };
 
   const navigateLogin = () => {
@@ -104,8 +104,7 @@ const LoginForm = () => {
         setLoggedIn(true);
         setUserName("");
         setPassword("");
-        navigateHome();
-      }
+        navigateEvents()      }
     } catch (error) {
       // setErrorMessage("Credenciales inválidas");
       // setTimeout(() => {
